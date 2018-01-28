@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B24C514-473E-4BF5-BA6E-0FE6B264475A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServerBySocket</RootNamespace>
+    <AssemblyName>ServerBySocket</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v15.2.Drawing, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="log4net">
+      <HintPath>.\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.Common">
+      <HintPath>.\SuperSocket.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketBase">
+      <HintPath>.\SuperSocket.SocketBase.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperSocket.SocketEngine">
+      <HintPath>.\SuperSocket.SocketEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ch\COM.cs" />
+    <Compile Include="ch\DataStream.cs" />
+    <Compile Include="ch\ITransport.cs" />
+    <Compile Include="ch\Port.cs" />
+    <Compile Include="ComManager.cs" />
+    <Compile Include="Config\IniFile.cs" />
+    <Compile Include="Config\Profile.cs" />
+    <Compile Include="ConnectSetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConnectSetupForm.Designer.cs">
+      <DependentUpon>ConnectSetupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EcxUserControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EcxUserControl.Designer.cs">
+      <DependentUpon>EcxUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FucTimeCtrl.cs" />
+    <Compile Include="MethodScoll.cs" />
+    <Compile Include="MultipleGetPortName.cs" />
+    <Compile Include="PraseEvent.cs" />
+    <Compile Include="PraseHeartBeat.cs" />
+    <Compile Include="PraseLogin.cs" />
+    <Compile Include="PraseNetCfg.cs" />
+    <Compile Include="PraseSwitchTime.cs" />
+    <Compile Include="PraseTerminalCfg.cs" />
+    <Compile Include="PraseTimeCtrl.cs" />
+    <Compile Include="SplitContainerE.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ToolBH1750.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolBH1750.Designer.cs">
+      <DependentUpon>ToolBH1750.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolConvertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolConvertForm.Designer.cs">
+      <DependentUpon>ToolConvertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PraseTerminalCommon.cs" />
+    <Compile Include="PraseStatus.cs" />
+    <Compile Include="Convert\LogHelper.cs" />
+    <Compile Include="ITransport.cs" />
+    <Compile Include="MsgID.cs" />
+    <Compile Include="Convert\BCD.cs" />
+    <Compile Include="Convert\Bits.cs" />
+    <Compile Include="Convert\Bytes.cs" />
+    <Compile Include="Convert\Hex.cs" />
+    <Compile Include="CRC.cs" />
+    <Compile Include="DLT645.cs" />
+    <Compile Include="FirmwareUpdate.cs" />
+    <Compile Include="JT808.cs" />
+    <Compile Include="FuncUserCtrl.cs" />
+    <Compile Include="MsgData.cs" />
+    <Compile Include="ServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerForm.Designer.cs">
+      <DependentUpon>ServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocketManager.cs" />
+    <Compile Include="ToolCalcCrc8Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolCalcCrc8Form.Designer.cs">
+      <DependentUpon>ToolCalcCrc8Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transmission.cs" />
+    <Compile Include="灯杆通讯端点集合.cs" />
+    <EmbeddedResource Include="ConnectSetupForm.resx">
+      <DependentUpon>ConnectSetupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EcxUserControl.resx">
+      <DependentUpon>EcxUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirmwareUpdate.resx">
+      <DependentUpon>FirmwareUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="ServerForm.resx">
+      <DependentUpon>ServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Content Include="Config\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="ToolBH1750.resx">
+      <DependentUpon>ToolBH1750.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolCalcCrc8Form.resx">
+      <DependentUpon>ToolCalcCrc8Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolConvertForm.resx">
+      <DependentUpon>ToolConvertForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Config\log4net.unix.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
