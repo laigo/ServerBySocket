@@ -128,6 +128,12 @@ namespace QF
                         return;
                     }
             }
+            //
+            //硬件流控制
+            DTS.Checked = Profile.G_DTSENABLE=="true"  ? true : false;
+            RTS.Checked = Profile.G_RTSENABLE=="true"  ? true : false;
+
+
             #endregion              
 
             #region 本机电脑串口检测
@@ -158,6 +164,12 @@ namespace QF
             //COM 或者 socket 选择
             comboBox1.SelectedIndex = 0;
             #endregion
+
+            ToolTip p = new ToolTip();
+            p.ShowAlways = true;
+            p.IsBalloon = true;
+            p.SetToolTip(this.RTS, "Request To Send 用来标明接收设备有没有准备好接收数据");
+            p.SetToolTip(this.DTS, "Data Terminal Ready 数据终端准备好");
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -167,7 +179,6 @@ namespace QF
             {
                 _sp.Close();
             }
-
 
             #region 串口设置
             try
@@ -209,15 +220,13 @@ namespace QF
                         break;
                 }
 
-                /*
-                COM port_com = new COM(_sp);
-                List<Port> ports = new List<Port>();
-                ports.Add(port_com);
+                //硬件流控制
+                _sp.DtrEnable = DTS.Checked ? true : false;
+                _sp.RtsEnable = RTS.Checked ? true : false;
 
-                Transmission.Init(ports);
-                Transmission.Run();
-                
-                */
+                Profile.G_DTSENABLE = DTS.Checked ? "true" : "false";
+                Profile.G_RTSENABLE = RTS.Checked ? "true" : "false";
+
                 Profile.G_PORTNAME = _sp.PortName;
 
                 Profile.G_BAUDRATE = _sp.BaudRate + "";       //波特率
@@ -234,10 +243,5 @@ namespace QF
 
             #endregion
         }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-        }
-
     }
 }

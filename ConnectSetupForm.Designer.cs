@@ -49,6 +49,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.RTS = new System.Windows.Forms.CheckBox();
+            this.DTS = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -56,6 +58,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.DTS);
+            this.groupBox1.Controls.Add(this.RTS);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.cbStop);
             this.groupBox1.Controls.Add(this.cbParity);
@@ -166,7 +170,6 @@
             this.buttonCancel.TabIndex = 15;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // groupBox3
             // 
@@ -291,6 +294,26 @@
             this.comboBox2.TabIndex = 0;
             this.comboBox2.Text = "127.0.0.1";
             // 
+            // RTS
+            // 
+            this.RTS.AutoSize = true;
+            this.RTS.Location = new System.Drawing.Point(158, 67);
+            this.RTS.Name = "RTS";
+            this.RTS.Size = new System.Drawing.Size(42, 16);
+            this.RTS.TabIndex = 33;
+            this.RTS.Text = "RTS";
+            this.RTS.UseVisualStyleBackColor = true;
+            // 
+            // DTS
+            // 
+            this.DTS.AutoSize = true;
+            this.DTS.Location = new System.Drawing.Point(159, 91);
+            this.DTS.Name = "DTS";
+            this.DTS.Size = new System.Drawing.Size(42, 16);
+            this.DTS.TabIndex = 34;
+            this.DTS.Text = "DTS";
+            this.DTS.UseVisualStyleBackColor = true;
+            // 
             // ConnectSetupForm
             // 
             this.AcceptButton = this.buttonOK;
@@ -307,6 +330,7 @@
             this.Text = "Connection Setup";
             this.Load += new System.EventHandler(this.ConnectionSetupForm_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -337,5 +361,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label7;
         public System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.CheckBox DTS;
+        private System.Windows.Forms.CheckBox RTS;
     }
 }

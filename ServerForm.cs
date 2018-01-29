@@ -72,9 +72,7 @@ namespace ServerBySocket
 
                 if (txtMsg.Text.Length > 512 * 1024)//512KB
                 {
-                    string path = System.Environment.CurrentDirectory + "\\richtextlog\\" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
-                    this.txtMsg.SaveFile(path, RichTextBoxStreamType.PlainText);//重点在此句                
-
+                    SaveRichTextMsg();    
                     txtMsg.Clear();
                 }
             }));
@@ -132,9 +130,24 @@ namespace ServerBySocket
 
         private void ServerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string path = System.Environment.CurrentDirectory + "\\richtextlog\\" + DateTime.Now.ToString("yyyyMMddHHmm") + ".txt";
-            this.txtMsg.SaveFile(path, RichTextBoxStreamType.PlainText);//重点在此句      
+            SaveRichTextMsg();
+   
         }
+
+        private void SaveRichTextMsg()
+        {
+            string path = System.Environment.CurrentDirectory + "\\richtextlog\\";
+
+            if (Directory.Exists(path) == false)//如果不存在就创建file文件夹
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            path+=(DateTime.Now.ToString("yyyyMMddHHmm") + ".txt");
+            this.txtMsg.SaveFile(path, RichTextBoxStreamType.PlainText);//重点在此句       
+        }
+
+
 
         public void InitTabControlConsole()
         { 
@@ -196,6 +209,8 @@ namespace ServerBySocket
             {
                 _sp.Close();
             }
+
+            _sp.DtrEnable = true;
 
             _sp.PortName = cbSerial.SelectedItem.ToString();
             _sp.BaudRate = Convert.ToInt32(Profile.G_BAUDRATE);       //波特率

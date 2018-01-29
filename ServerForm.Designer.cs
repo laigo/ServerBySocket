@@ -659,7 +659,7 @@ namespace ServerBySocket
             0,
             0});
             this.QueryIntervalTime.Minimum = new decimal(new int[] {
-            3000,
+            100,
             0,
             0,
             0});
