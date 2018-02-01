@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>工具.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
@@ -163,6 +166,7 @@
     </Compile>
     <Compile Include="Transmission.cs" />
     <Compile Include="灯杆通讯端点集合.cs" />
+    <Content Include="工具.ico" />
     <EmbeddedResource Include="ConnectSetupForm.resx">
       <DependentUpon>ConnectSetupForm.cs</DependentUpon>
     </EmbeddedResource>

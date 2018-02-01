@@ -233,7 +233,9 @@ namespace QF
                 Profile.G_DATABITS = _sp.DataBits + "";       //数据位
                 Profile.G_STOP = cbStop.Text;               //停止位
                 Profile.G_PARITY = cbParity.Text;           //校验位
-                INIFILE.Profile.SaveProfile();     
+                INIFILE.Profile.SaveProfile();
+
+                Transmission.cfg.settings.serialPort = _sp;
             }
             catch (System.Exception ex)
             {
@@ -241,6 +243,18 @@ namespace QF
                 return;
             }
 
+            #endregion
+        }
+
+        private void cbSerial_DropDown(object sender, EventArgs e)
+        {
+            //更新本机串口列表
+            #region 串口列表添加
+            cbSerial.Items.Clear();
+            foreach (string s in System.IO.Ports.SerialPort.GetPortNames())//获取有多少个COM口
+            {
+                cbSerial.Items.Add(s);
+            }
             #endregion
         }
     }

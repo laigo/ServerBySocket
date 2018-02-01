@@ -46,11 +46,10 @@ namespace ServerBySocket
 
         private void InitTimerForStatusStrip()
         {
-            
             aTimer = new System.Timers.Timer(1000);
             aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             aTimer.Interval = 1000;
-            aTimer.Enabled = true;        
+            aTimer.Enabled = true; 
         }
 
         /// <summary>
@@ -65,17 +64,20 @@ namespace ServerBySocket
             this.Dispatcher.Invoke(DispatcherPriority.Normal,
                 new TimerDispatcherDelegate(updateUI));
             */
-            this.Invoke((EventHandler)(delegate
-            {
-                //状态条显示内容更新
-                this.工具条_RTC_状态.Text = "系统时间：" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-
-                if (txtMsg.Text.Length > 512 * 1024)//512KB
+            if (this.IsHandleCreated)
+            { 
+                this.Invoke((EventHandler)(delegate
                 {
-                    SaveRichTextMsg();    
-                    txtMsg.Clear();
-                }
-            }));
+                    //状态条显示内容更新
+                    this.工具条_RTC_状态.Text = "系统时间：" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+                    if (txtMsg.Text.Length > 512 * 1024)//512KB
+                    {
+                        SaveRichTextMsg();    
+                        txtMsg.Clear();
+                    }
+                }));            
+            }
         }
 
         public ServerForm()
@@ -210,7 +212,6 @@ namespace ServerBySocket
                 _sp.Close();
             }
 
-            _sp.DtrEnable = true;
 
             _sp.PortName = cbSerial.SelectedItem.ToString();
             _sp.BaudRate = Convert.ToInt32(Profile.G_BAUDRATE);       //波特率
@@ -245,6 +246,11 @@ namespace ServerBySocket
                     MessageBox.Show("Error：参数不正确!", "Error");
                     break;
             }
+
+            //硬件流控制
+            _sp.DtrEnable = (Profile.G_DTSENABLE=="true") ? true : false;
+            _sp.RtsEnable = (Profile.G_RTSENABLE=="true") ? true : false;
+
 
             try
             {
@@ -1700,11 +1706,26 @@ namespace ServerBySocket
             // Show testDialog as a modal dialog and determine if DialogResult = OK.
             if (testDialog.ShowDialog(this) == DialogResult.OK)
             {
-                // Read the contents of testDialog's TextBox.
-                
-                //获取当前串口号
+                //串口...设置 todo?
                 SerialPort _sp = Transmission.cfg.settings.serialPort;
-                cbSerial.SelectedIndex = cbSerial.Items.IndexOf(_sp.PortName);
+
+                if (cbSerial.SelectedItem.ToString() == _sp.PortName)
+                {
+                    cbSerial_SelectedIndexChanged(null, null);
+                }
+                else
+                {
+                    int index = cbSerial.Items.IndexOf(_sp.PortName);
+                    if (index != -1)
+                    {
+                        cbSerial.SelectedIndex = index;
+                    }
+                    else
+                    {
+                        //todo? 更新cbSerial串口列表
+                        InitComm();
+                    }
+                }   
             }
             else
             {
